@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
+import com.example.comer.autosmslogin.SmsApp;
+import com.example.comer.autosmslogin.activation.ActivationSms;
 import com.example.comer.autosmslogin.activation.ActivationSmsPresenter;
 import com.example.comer.autosmslogin.activation.IActivationSmsView;
 
@@ -13,11 +15,13 @@ import com.example.comer.autosmslogin.activation.IActivationSmsView;
  * Created by musta on 23.08.2016.
  */
 public class SmsService extends BroadcastReceiver {
-    private String TAG = ActivationSmsPresenter.class.getSimpleName();
     IActivationSmsView activitionSmsView;
-    String username;
+    ActivationSms activationSms = null;
+    private String TAG = ActivationSmsPresenter.class.getSimpleName();
+
     @Override
     public void onReceive(Context context, Intent intent) {
+
         // Get the data (SMS data) bound to intent
         Bundle bundle = intent.getExtras();
         SmsMessage[] msgs = null;
@@ -37,9 +41,14 @@ public class SmsService extends BroadcastReceiver {
                // str += "SMS from " + msgs[0].getOriginatingAddress() + " : ";
                 // Fetch the text message
             if(msgs[0].getMessageBody().toString().substring(0,7).equals("şifre: "))
-                str += msgs[0].getMessageBody().toString().substring(7,13);
-            activitionSmsView.incomingMessage(str);
-          }
-
+                str += msgs[0].getMessageBody().toString().substring(7, 13);
+        }
+        if (SmsApp.checkSms == false && str.equals("000000")) {
+            SmsApp.checkSms = true;
+            Intent in = new Intent(context, ActivationSms.class);
+            in.putExtra("msg", str);
+            context.startActivity(in);
+        }
     }
+
 }

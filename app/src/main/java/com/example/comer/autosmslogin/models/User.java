@@ -12,7 +12,7 @@ public class User extends RealmObject {
     @PrimaryKey
     private String username;
     private String password;
-    private boolean eMail = false;
+    private boolean eMail;
 
     public User() {
 

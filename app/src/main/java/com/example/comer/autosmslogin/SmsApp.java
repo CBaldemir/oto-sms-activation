@@ -2,7 +2,6 @@ package com.example.comer.autosmslogin;
 
 import android.app.Application;
 
-
 import com.example.comer.autosmslogin.di.component.DaggerIApplicationComponent;
 import com.example.comer.autosmslogin.di.component.IApplicationComponent;
 import com.example.comer.autosmslogin.di.module.ApplicationModule;
@@ -11,8 +10,9 @@ import com.example.comer.autosmslogin.di.module.ApplicationModule;
  * Created by musta on 23.08.2016.
  */
 public class SmsApp extends Application {
+    public static String username;
+    public static boolean checkSms = false;
     private IApplicationComponent component;
-
 
     @Override
     public void onCreate() {
@@ -26,6 +26,4 @@ public class SmsApp extends Application {
     public IApplicationComponent getComponent() {
         return component;
     }
-
-
 }

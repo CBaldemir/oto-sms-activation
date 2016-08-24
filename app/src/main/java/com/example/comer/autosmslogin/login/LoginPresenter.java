@@ -2,32 +2,22 @@ package com.example.comer.autosmslogin.login;
 
 import android.app.Application;
 
-import com.example.comer.autosmslogin.models.User;
 import com.example.comer.autosmslogin.SmsApp;
-
-import javax.inject.Inject;
-
-import io.realm.Realm;
+import com.example.comer.autosmslogin.models.User;
 
 /**
  * Created by comer on 23.08.2016.
  */
 public class LoginPresenter implements ILoginPresenter {
     ILoginView view;
-    @Inject
-    Realm realm;
+
     IDatabaseInteractor databaseInteractor;
 
     public LoginPresenter(ILoginView view, Application application) {
         this.view = view;
-        ((SmsApp) application).getComponent().inject(this);
         databaseInteractor = new DatabaseInteractor(application);
     }
 
-    @Override
-    public void Databasecontrol() {
-
-    }
 
     @Override
     public void clickSignUp() {
@@ -38,23 +28,24 @@ public class LoginPresenter implements ILoginPresenter {
     public void clickLogIn(String username, String password) {
         User user;
         if (username.isEmpty() || password.isEmpty()) {
-            view.toast("lütfen tüm alanları doldurunuz");
+            view.fiilAllError();
         } else {
             user = databaseInteractor.checkUser(username);
             if (user != null) {
                 if (user.getPassword().equals(password)) {
                     if(databaseInteractor.checkEMail(username))
                     {
-                        view.toast("giriş başarılı");
+                        view.trueAcces();
                     }
                     else{
-
+                        view.setEMailTrue(username);
+                        SmsApp.checkSms = false;
                     }
                 } else {
-                    view.toast("şifre yanlış");
+                    view.accesError();
                 }
             } else {
-                view.toast("kullanıcı bulunamadı lütfen kayıt olunuz");
+                view.accesError();
             }
         }
     }

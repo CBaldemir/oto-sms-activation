@@ -8,9 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.comer.autosmslogin.activation.ActivationSms;
 import com.example.comer.autosmslogin.R;
-import com.example.comer.autosmslogin.signup.SignUp;
 import com.example.comer.autosmslogin.activation.ActivationSms;
 import com.example.comer.autosmslogin.signup.SignUp;
 
@@ -48,25 +46,11 @@ public class Login extends AppCompatActivity implements ILoginView{
 
     }
 
-    @Override
-    public void onSuccess() {
-
-    }
-
-    @Override
-    public void onFailed() {
-
-    }
-
-    @Override
-    public void onActive() {
-
-    }
 
     @Override
     public void goActivation(String username) {
-        Intent loginol = new Intent(getApplication(), ActivationSms.class);
-        getIntent().putExtra("username",username);
+        Intent loginol = new Intent(Login.this, ActivationSms.class);
+        loginol.putExtra("username", username);
         startActivity(loginol);
     }
 
@@ -77,7 +61,29 @@ public class Login extends AppCompatActivity implements ILoginView{
     }
 
     @Override
-    public void toast(String text) {
-        Toast.makeText(Login.this, text, Toast.LENGTH_SHORT).show();
+    public void setEMailTrue(String username) {
+        Intent loginol = new Intent();
+        loginol.putExtra("username", username);
+        loginol.setClass(getApplicationContext(), ActivationSms.class);
+        startActivity(loginol);
+        Toast.makeText(Login.this, "Lütfen hesap aktivasyonunu yapınız", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void accesError() {
+        Toast.makeText(Login.this, "Kullanıcı adı veya şifre hatalı,eğer kayıtlı " +
+                "değilseniz lütfen kayıt olunuz", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void fiilAllError() {
+        Toast.makeText(Login.this, "Lütfen tüm alanları doldurunuz", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void trueAcces() {
+        Toast.makeText(Login.this, "Giriş başarılı", Toast.LENGTH_SHORT).show();
+    }
+
 }

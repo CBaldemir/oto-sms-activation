@@ -2,8 +2,8 @@ package com.example.comer.autosmslogin.login;
 
 import android.app.Application;
 
-import com.example.comer.autosmslogin.models.User;
 import com.example.comer.autosmslogin.SmsApp;
+import com.example.comer.autosmslogin.models.User;
 
 import javax.inject.Inject;
 
@@ -47,9 +47,12 @@ public class DatabaseInteractor implements IDatabaseInteractor {
     @Override
     public void setEmailTrue(String username) {
         final User user = realm.where(User.class).equalTo("username", username).findFirst();
-        user.seteMail(true);
+        User us = new User();
+        us.setPassword(user.getPassword());
+        us.setUsername(user.getUsername());
+        us.seteMail(true);
         realm.beginTransaction();
-        User realmUser = realm.copyToRealm(user);
+        User realmUser = realm.copyToRealmOrUpdate(us);
         realm.commitTransaction();
     }
 }

@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.comer.autosmslogin.activation.ActivationSms;
 import com.example.comer.autosmslogin.R;
+import com.example.comer.autosmslogin.activation.ActivationSms;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +37,6 @@ private ISignupPresenter signupPresenter;
     public void onClick(View view) {
         signupPresenter.clickSave(username.getText().toString(), password.getText().toString());
 
-        onSuccess();
     }
     @Override
     public void onSuccess() {
@@ -45,19 +44,15 @@ private ISignupPresenter signupPresenter;
     }
 
     @Override
-    public void onFailed() {
-
-
-    }
-
-    @Override
-    public void clickSave() {
-
-    }
-    @Override
     public void goActivation(String username) {
-        Intent loginol = new Intent(getApplication(), ActivationSms.class);
-        getIntent().putExtra("username",username);
+        Intent loginol = new Intent();
+        loginol.putExtra("username", username);
+        loginol.setClass(getApplicationContext(), ActivationSms.class);
         startActivity(loginol);
+    }
+
+    @Override
+    public void emptyAllert() {
+        Toast.makeText(SignUp.this, "Lütfen gerekli alanları doldurunuz.", Toast.LENGTH_SHORT).show();
     }
 }

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Auto_Sms_Login.iml" filepath="$PROJECT_DIR$/Auto_Sms_Login.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oto-sms-activation.iml" filepath="$PROJECT_DIR$/oto-sms-activation.iml" />
     </modules>
   </component>
 </project>
