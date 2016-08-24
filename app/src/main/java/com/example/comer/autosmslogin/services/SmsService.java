@@ -35,11 +35,11 @@ public class SmsService extends BroadcastReceiver {
 
             // For every SMS message received
 
-                // Convert Object array
-                msgs[0] = SmsMessage.createFromPdu((byte[]) pdus[0]);
-                // Sender's phone number
-               // str += "SMS from " + msgs[0].getOriginatingAddress() + " : ";
-                // Fetch the text message
+            // Convert Object array
+            msgs[0] = SmsMessage.createFromPdu((byte[]) pdus[0]);
+            // Sender's phone number
+            // str += "SMS from " + msgs[0].getOriginatingAddress() + " : ";
+            // Fetch the text message
             if(msgs[0].getMessageBody().toString().substring(0,7).equals("şifre: "))
                 str += msgs[0].getMessageBody().toString().substring(7, 13);
         }
