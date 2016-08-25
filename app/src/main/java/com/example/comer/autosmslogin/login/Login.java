@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.comer.autosmslogin.R;
 import com.example.comer.autosmslogin.activation.ActivationSms;
+import com.example.comer.autosmslogin.services.SmsService;
 import com.example.comer.autosmslogin.signup.SignUp;
 
 import butterknife.BindView;
@@ -63,7 +64,7 @@ public class Login extends AppCompatActivity implements ILoginView{
     @Override
     public void setEMailTrue(String username) {
         Intent loginol = new Intent();
-        loginol.putExtra("username", username);
+        SmsService.username = username;
         loginol.setClass(getApplicationContext(), ActivationSms.class);
         startActivity(loginol);
         Toast.makeText(Login.this, "Lütfen hesap aktivasyonunu yapınız", Toast.LENGTH_SHORT).show();

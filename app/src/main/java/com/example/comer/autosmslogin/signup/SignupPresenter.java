@@ -2,10 +2,10 @@ package com.example.comer.autosmslogin.signup;
 
 import android.app.Application;
 
-import com.example.comer.autosmslogin.SmsApp;
 import com.example.comer.autosmslogin.login.DatabaseInteractor;
 import com.example.comer.autosmslogin.login.IDatabaseInteractor;
 import com.example.comer.autosmslogin.models.User;
+import com.example.comer.autosmslogin.services.SmsService;
 
 /**
  * Created by comer on 23.08.2016.
@@ -30,7 +30,7 @@ public class SignupPresenter implements ISignupPresenter{
             user.setPassword(password);
             user.seteMail(false);
             databaseInteractor.addUser(user);
-            SmsApp.checkSms = false;
+            SmsService.checkSms = false;
             view.goActivation(username);
             view.onSuccess();
 

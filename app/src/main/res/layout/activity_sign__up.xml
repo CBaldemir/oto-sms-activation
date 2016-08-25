@@ -25,21 +25,13 @@
         android:inputType="textPassword"
         android:textSize="12sp"
         />
-    <EditText
-        android:id="@+id/ulke"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/sifre"
-        android:hint="Ülkenizi Giriniz"
-        android:textSize="12sp"
-        />
-<Button
+
+    <Button
     android:id="@+id/sing_up_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/ulke"
+        android:layout_below="@id/sifre"
     android:clickable="true"
-    android:text="Kaydol"
-    />
+        android:text="Kaydol" />
 
 </RelativeLayout>

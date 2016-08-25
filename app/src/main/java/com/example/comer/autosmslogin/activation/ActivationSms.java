@@ -10,8 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.example.comer.autosmslogin.R;
-import com.example.comer.autosmslogin.SmsApp;
 import com.example.comer.autosmslogin.login.Login;
+import com.example.comer.autosmslogin.services.SmsService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,6 @@ public int REQUEST_PERMISSIONS=0;
     Bundle bundle;
     String username, msg;
     Intent intent;
-    boolean control = false;
     private IActivationSmsPresenter activationSmsPresenter;
 
     @Override
@@ -63,20 +62,12 @@ public int REQUEST_PERMISSIONS=0;
         activationSmsPresenter = new ActivationSmsPresenter(this, getApplication());
         intent = getIntent();
         bundle = intent.getExtras();
-        username = bundle.getString("username");
-        msg = bundle.getString("msg");
-        {
-            if (username == null) {
-                username = SmsApp.username;
-                control = true;
-            } else {
-                SmsApp.username = username;
-                control = false;
-            }
+        try {
+            msg = bundle.getString("msg");
+        } catch (Exception e) {
         }
-        username = username + "";
-        if (control)
-            if (username != null && msg != null) {
+        username = SmsService.username;
+        if (username != null && msg != null) {
                 incomingMessage(msg);
-                control = false;
-            }}}
+
+        }}}

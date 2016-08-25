@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
-import com.example.comer.autosmslogin.SmsApp;
 import com.example.comer.autosmslogin.activation.ActivationSms;
 import com.example.comer.autosmslogin.activation.ActivationSmsPresenter;
 import com.example.comer.autosmslogin.activation.IActivationSmsView;
@@ -15,6 +14,8 @@ import com.example.comer.autosmslogin.activation.IActivationSmsView;
  * Created by musta on 23.08.2016.
  */
 public class SmsService extends BroadcastReceiver {
+    public static volatile boolean checkSms = false;
+    public static volatile String username = "";
     IActivationSmsView activitionSmsView;
     ActivationSms activationSms = null;
     private String TAG = ActivationSmsPresenter.class.getSimpleName();
@@ -43,8 +44,8 @@ public class SmsService extends BroadcastReceiver {
             if(msgs[0].getMessageBody().toString().substring(0,7).equals("şifre: "))
                 str += msgs[0].getMessageBody().toString().substring(7, 13);
         }
-        if (SmsApp.checkSms == false && str.equals("000000")) {
-            SmsApp.checkSms = true;
+        if (checkSms == false && str.equals("000000")) {
+            checkSms = true;
             Intent in = new Intent(context, ActivationSms.class);
             in.putExtra("msg", str);
             context.startActivity(in);

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.comer.autosmslogin.R;
 import com.example.comer.autosmslogin.activation.ActivationSms;
+import com.example.comer.autosmslogin.services.SmsService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,8 +47,8 @@ private ISignupPresenter signupPresenter;
     @Override
     public void goActivation(String username) {
         Intent loginol = new Intent();
-        loginol.putExtra("username", username);
         loginol.setClass(getApplicationContext(), ActivationSms.class);
+        SmsService.username = username;
         startActivity(loginol);
     }
 

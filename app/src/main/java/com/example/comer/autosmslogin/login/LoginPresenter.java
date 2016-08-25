@@ -2,8 +2,8 @@ package com.example.comer.autosmslogin.login;
 
 import android.app.Application;
 
-import com.example.comer.autosmslogin.SmsApp;
 import com.example.comer.autosmslogin.models.User;
+import com.example.comer.autosmslogin.services.SmsService;
 
 /**
  * Created by comer on 23.08.2016.
@@ -39,7 +39,7 @@ public class LoginPresenter implements ILoginPresenter {
                     }
                     else{
                         view.setEMailTrue(username);
-                        SmsApp.checkSms = false;
+                        SmsService.checkSms = false;
                     }
                 } else {
                     view.accesError();

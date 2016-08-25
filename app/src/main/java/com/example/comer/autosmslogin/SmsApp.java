@@ -10,8 +10,6 @@ import com.example.comer.autosmslogin.di.module.ApplicationModule;
  * Created by musta on 23.08.2016.
  */
 public class SmsApp extends Application {
-    public static String username;
-    public static boolean checkSms = false;
     private IApplicationComponent component;
 
     @Override
