@@ -26,6 +26,16 @@ public class SignupPresenter implements ISignupPresenter{
         if (username.isEmpty() || password.isEmpty()) {
             view.emptyAllert();
         }
+        usera=databaseInteractor.checkSignUser(username);
+        if (usera != null) {
+            try {
+                if (usera.getUsername().equals(username))
+                {view.signFailed();}}
+            catch (Exception e){}
+        }
+
+
+
         else {
             User user = new User();
             user.setUsername(username);

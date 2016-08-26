@@ -24,7 +24,6 @@ public class DatabaseInteractor implements IDatabaseInteractor {
 
     @Override
     public void addUser(User user) {
-
             realm.beginTransaction();
             User realmUser = realm.copyToRealm(user);
             realm.commitTransaction();
