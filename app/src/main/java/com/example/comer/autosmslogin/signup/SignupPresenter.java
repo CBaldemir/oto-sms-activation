@@ -13,7 +13,7 @@ import com.example.comer.autosmslogin.services.SmsService;
 public class SignupPresenter implements ISignupPresenter{
     ISignupView view;
     IDatabaseInteractor databaseInteractor;
-    User usera;
+    User signuser;
     public SignupPresenter(ISignupView view, Application application) {
         this.view = view;
         databaseInteractor = new DatabaseInteractor(application);
@@ -26,10 +26,10 @@ public class SignupPresenter implements ISignupPresenter{
         if (username.isEmpty() || password.isEmpty()) {
             view.emptyAllert();
         }
-        usera=databaseInteractor.checkSignUser(username);
-        if (usera != null) {
+        signuser=databaseInteractor.checkSignUser(username);
+        if (signuser != null) {
             try {
-                if (usera.getUsername().equals(username))
+                if (signuser.getUsername().equals(username))
                 {view.signFailed();}}
             catch (Exception e){}
         }
