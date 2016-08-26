@@ -45,6 +45,11 @@ private ISignupPresenter signupPresenter;
     }
 
     @Override
+    public void signFailed() {
+        Toast.makeText(SignUp.this, "Farklı bir kullnıcı adı giriniz", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void goActivation(String username) {
         Intent loginol = new Intent();
         loginol.setClass(getApplicationContext(), ActivationSms.class);

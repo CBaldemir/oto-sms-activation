@@ -28,7 +28,9 @@ public int REQUEST_PERMISSIONS=0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activition__sms);
-        serviceControl();
+
+
+
         int smsOkumaIzni = ContextCompat.checkSelfPermission(this.getApplicationContext(),Manifest.permission.RECEIVE_SMS);
         if(smsOkumaIzni != PackageManager.PERMISSION_GRANTED){
             izinler.add(Manifest.permission.RECEIVE_SMS);
@@ -37,7 +39,41 @@ public int REQUEST_PERMISSIONS=0;
             ActivityCompat.requestPermissions(this,izinler.toArray(new String[izinler.size()]), REQUEST_PERMISSIONS);}
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        serviceControl();
+        bundle = intent.getExtras();
+        try {
+            msg = bundle.getString("msg");
+        } catch (Exception e) {
+        }
+        username = SmsService.username;
+        if (username != null && msg != null) {
+            incomingMessage(msg);
+        }
+            super.onNewIntent(intent);
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch ( requestCode ) {
+            case 0: {
+                for( int i = 0; i < permissions.length; i++ ) {
+                    if( grantResults[i] == PackageManager.PERMISSION_GRANTED ) {
+                        Toast.makeText(ActivationSms.this, "İzin başarıyla verildi", Toast.LENGTH_SHORT).show();
+                    } else if( grantResults[i] == PackageManager.PERMISSION_DENIED ) {
+
+                        Toast.makeText(ActivationSms.this, "Eğer izin vermezseniz aktivasyon yapamazsınız", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+            break;
+            default: {
+                onRequestPermissionsResult(requestCode, permissions, grantResults);
+            }
+        }
+
+    }
 
     @Override
     public void incomingMessage(String msg) {
@@ -58,16 +94,16 @@ public int REQUEST_PERMISSIONS=0;
         Toast.makeText(ActivationSms.this, "Yanlış mesaj", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void permissionSuccess() {
+        Toast.makeText(ActivationSms.this, "İzin başarılı", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void permissionFailed() {
+        Toast.makeText(ActivationSms.this, "Eğer izin vermezseniz sms activasyonunu yapamazsınız", Toast.LENGTH_SHORT).show();
+    }
+
     private void serviceControl() {
         activationSmsPresenter = new ActivationSmsPresenter(this, getApplication());
-        intent = getIntent();
-        bundle = intent.getExtras();
-        try {
-            msg = bundle.getString("msg");
-        } catch (Exception e) {
-        }
-        username = SmsService.username;
-        if (username != null && msg != null) {
-                incomingMessage(msg);
-
-        }}}
+     }}

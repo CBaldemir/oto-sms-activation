@@ -9,7 +9,7 @@ public interface IDatabaseInteractor {
     void addUser(User user);
 
     User checkUser(String username);
-
+    User checkSignUser(String username);
     boolean checkEMail(String username);
 
     void setEmailTrue(String username);

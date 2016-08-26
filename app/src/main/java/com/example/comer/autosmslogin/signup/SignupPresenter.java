@@ -13,7 +13,7 @@ import com.example.comer.autosmslogin.services.SmsService;
 public class SignupPresenter implements ISignupPresenter{
     ISignupView view;
     IDatabaseInteractor databaseInteractor;
-
+    User usera;
     public SignupPresenter(ISignupView view, Application application) {
         this.view = view;
         databaseInteractor = new DatabaseInteractor(application);
@@ -22,9 +22,11 @@ public class SignupPresenter implements ISignupPresenter{
 
     @Override
     public void clickSave(String username, String password) {
+
         if (username.isEmpty() || password.isEmpty()) {
             view.emptyAllert();
-        } else {
+        }
+        else {
             User user = new User();
             user.setUsername(username);
             user.setPassword(password);
@@ -32,9 +34,5 @@ public class SignupPresenter implements ISignupPresenter{
             databaseInteractor.addUser(user);
             SmsService.checkSms = false;
             view.goActivation(username);
-            view.onSuccess();
-
-        }
-
-    }
-}
+            view.onSuccess();}
+        }}

@@ -5,9 +5,8 @@ package com.example.comer.autosmslogin.signup;
  */
 public interface ISignupView {
     void onSuccess();
-
+    void signFailed();
     void goActivation(String username);
-
     void emptyAllert();
 
 

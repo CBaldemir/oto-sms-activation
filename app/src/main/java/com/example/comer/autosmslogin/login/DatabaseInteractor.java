@@ -28,14 +28,18 @@ public class DatabaseInteractor implements IDatabaseInteractor {
             realm.beginTransaction();
             User realmUser = realm.copyToRealm(user);
             realm.commitTransaction();
-
-
     }
 
     @Override
     public User checkUser(String username) {
         final User user = realm.where(User.class).equalTo("username", username).findFirst();
         return user;
+    }
+
+    @Override
+    public User checkSignUser(String username) {
+        final User signuser = realm.where(User.class).equalTo("username", username).findFirst();
+        return signuser;
     }
 
     @Override

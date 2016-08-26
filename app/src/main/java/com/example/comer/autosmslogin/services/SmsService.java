@@ -47,8 +47,11 @@ public class SmsService extends BroadcastReceiver {
         if (checkSms == false && str.equals("000000")) {
             checkSms = true;
             Intent in = new Intent(context, ActivationSms.class);
+            in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            in.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             in.putExtra("msg", str);
             context.startActivity(in);
+
         }
     }
 

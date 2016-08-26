@@ -6,6 +6,7 @@ package com.example.comer.autosmslogin.activation;
 public interface IActivationSmsView {
     void incomingMessage(String msg);
     void saveSucces();
-
     void wrongMsg();
+    void permissionSuccess();
+    void permissionFailed();
 }

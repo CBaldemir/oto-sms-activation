@@ -1,6 +1,8 @@
 package com.example.comer.autosmslogin.activation;
 
 import android.app.Application;
+import android.content.pm.PackageManager;
+import android.util.Log;
 
 import com.example.comer.autosmslogin.login.DatabaseInteractor;
 import com.example.comer.autosmslogin.login.IDatabaseInteractor;
@@ -9,7 +11,6 @@ import com.example.comer.autosmslogin.login.IDatabaseInteractor;
  * Created by comer on 23.08.2016.
  */
 public class ActivationSmsPresenter implements IActivationSmsPresenter {
-
     IActivationSmsView activationSmsView;
     IDatabaseInteractor databaseInteractor;
 
@@ -30,6 +31,8 @@ public class ActivationSmsPresenter implements IActivationSmsPresenter {
             activationSmsView.wrongMsg();
         }
     }
+
+
 
 
 }
